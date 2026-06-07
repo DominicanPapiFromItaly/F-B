@@ -1,0 +1,254 @@
+/* ---------------------- */
+/* APRI/CHIUDI OVERLAY    */
+/* ---------------------- */
+function toggleSearch() {
+  const overlay = document.getElementById("searchOverlay");
+  const page = document.getElementById("pageContent");
+
+  if (overlay.style.display === "block") {
+    overlay.style.display = "none";
+    page.classList.remove("page-shift");
+  } else {
+    overlay.style.display = "block";
+    page.classList.add("page-shift");
+    document.getElementById("searchField").focus();
+  }
+}
+
+/* NON CHIUDERE SE CLICCO SU LENTE O CAMPO */
+document.addEventListener("click", function(e) {
+  const overlay = document.getElementById("searchOverlay");
+  const icon = document.querySelector(".search-icon");
+  const field = document.getElementById("searchField");
+  const page = document.getElementById("pageContent");
+
+  if (
+    !overlay.contains(e.target) &&
+    !icon.contains(e.target) &&
+    e.target !== field
+  ) {
+    overlay.style.display = "none";
+    page.classList.remove("page-shift");
+  }
+});
+
+/* ---------------------- */
+/* MENU MOBILE            */
+/* ---------------------- */
+function toggleMobileMenu() {
+  const menu = document.getElementById("mobileMenu");
+  menu.classList.toggle("open");
+}
+
+document.addEventListener("click", function(e) {
+  const menu = document.getElementById("mobileMenu");
+  const icon = document.querySelector(".mobile-menu-icon");
+
+  if (!menu.contains(e.target) && !icon.contains(e.target)) {
+    menu.classList.remove("open");
+  }
+});
+
+/* ---------------------- */
+/* RICERCA INTERNA        */
+/* ---------------------- */
+const pages = [
+  { title: "Compressori", url: "compressori.html", keywords: "compressori aria industria" },
+  { title: "Pompe", url: "pompe.html", keywords: "pompe idrauliche industriali" },
+  { title: "Riduttori", url: "riduttori.html", keywords: "riduttori meccanici ingranaggi" },
+  { title: "Valvole", url: "valvole.html", keywords: "valvole industriali controllo flusso" },
+  { title: "Turbine", url: "turbine.html", keywords: "turbine industriali energia" },
+  { title: "Ricambi", url: "ricambi.html", keywords: "ricambi macchinari industriali" },
+  { title: "Compressori", url: "compressori.html", keywords: "compressori aria industria" },
+  { title: "Pompe", url: "pompe.html", keywords: "pompe idrauliche industriali" },
+  { title: "Riduttori", url: "riduttori.html", keywords: "riduttori meccanici ingranaggi" },
+  { title: "Valvole", url: "valvole.html", keywords: "valvole industriali controllo flusso" },
+  { title: "Turbine", url: "turbine.html", keywords: "turbine industriali energia" },
+  { title: "Ricambi", url: "ricambi.html", keywords: "ricambi macchinari industriali" },
+  { title: "Contatti", url: "contatti.html", keywords: "contatti telefono email sede legale amministrativa" },
+];
+
+function performSearch() {
+  const field = document.getElementById("searchField");
+  const query = field.value.toLowerCase().trim();
+
+  // Se il campo è vuoto → apri la barra e non cercare
+  if (query === "") {
+    document.getElementById("searchOverlay").style.display = "block";
+    document.getElementById("pageContent").classList.add("page-shift");
+    field.focus();
+    return;
+  }
+
+  const result = pages.find(p =>
+    p.title.toLowerCase().includes(query) ||
+    p.keywords.toLowerCase().includes(query)
+  );
+
+  if (result) {
+    window.location.href = result.url;
+  } else {
+    alert("Nessun risultato trovato.");
+  }
+}
+
+// Keep language dropdown open when clicking the arrow
+document.querySelector(".lang-arrow").addEventListener("click", (e) => {
+  e.stopPropagation();
+  const dropdown = document.querySelector(".lang-dropdown");
+
+  dropdown.style.display =
+    dropdown.style.display === "block" ? "none" : "block";
+});
+
+// Close dropdown only when clicking outside
+document.addEventListener("click", (e) => {
+  const switcher = document.querySelector(".lang-switcher");
+  const dropdown = document.querySelector(".lang-dropdown");
+
+  if (!switcher.contains(e.target)) {
+    dropdown.style.display = "none";
+  }
+});
+
+
+/* ---------------------- */
+document.getElementById("year").textContent = new Date().getFullYear();
+
+
+
+const botBtn = document.getElementById("fb-bot-button");
+const botWindow = document.getElementById("fb-bot-window");
+const input = document.getElementById("fb-user-input");
+const sendBtn = document.getElementById("fb-send-btn");
+const messages = document.getElementById("fb-bot-messages");
+
+/* APRI/CHIUDI BOT */
+botBtn.addEventListener("click", () => {
+  botWindow.style.display = botWindow.style.display === "flex" ? "none" : "flex";
+});
+
+/* FUNZIONE: CREA SUGGERIMENTI */
+function renderSuggestions() {
+  const sug = document.createElement("div");
+  sug.id = "fb-suggestions";
+  sug.innerHTML = `
+      <div class="suggestion"><i class="fas fa-file-signature"></i> Richiedi preventivo</div>
+      <div class="suggestion"><i class="fas fa-phone"></i> Contatti</div>
+      <div class="suggestion"><i class="fas fa-cogs"></i> Prodotti & Servizi</div>
+      <div class="suggestion"><i class="fas fa-tools"></i> Assistenza Tecnica</div>
+  `;
+  messages.appendChild(sug);
+
+  // Listener dei suggerimenti
+  sug.querySelectorAll(".suggestion").forEach(s => {
+    s.addEventListener("click", () => {
+      addUserMessage(s.textContent);
+      replyFromAI(s.textContent);
+    });
+  });
+}
+
+/* MOSTRA MESSAGGIO UTENTE (DESTRA) */
+function addUserMessage(text) {
+  const div = document.createElement("div");
+  div.className = "user-msg";
+  div.innerHTML = `<p>${text}</p>`;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+/* MOSTRA MESSAGGIO BOT (SINISTRA) */
+function addBotMessage(html) {
+  const div = document.createElement("div");
+  div.className = "bot-msg";
+  div.innerHTML = `<p>${html}</p>`;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+/* INVIO MESSAGGIO */
+sendBtn.addEventListener("click", sendMessage);
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter") sendMessage();
+});
+
+function sendMessage() {
+  const text = input.value.trim();
+  if (text === "") return;
+  addUserMessage(text);
+  replyFromAI(text);
+  input.value = "";
+}
+
+/* RISPOSTE DEL BOT */
+function replyFromAI(text) {
+  setTimeout(() => {
+    let response = "";
+
+    const t = text.toLowerCase();
+
+    if (t.includes("contatti")) {
+      response = `Puoi trovare tutti i contatti qui:<br><a href="contatti.html">contatti.html</a>`;
+    }
+    else if (t.includes("compressori")) {
+      response = `Ecco la sezione compressori:<br><a href="compressori.html">compressori.html</a>`;
+    }
+    else if (t.includes("preventivo")) {
+      response = `Per richiedere un preventivo visita:<br><a href="preventivo.html">preventivo.html</a>`;
+    }
+    else {
+      response = "Posso aiutarti con prodotti, servizi, contatti o assistenza tecnica.";
+    }
+
+    addBotMessage(response);
+  }, 500);
+}
+
+/* RESET CHAT */
+document.getElementById("fb-reset").addEventListener("click", () => {
+  messages.innerHTML = "";
+
+  addBotMessage("Ciao! Sono F&B Assistant AI, come posso aiutarti?");
+  renderSuggestions();
+});
+
+/* AVVIO INIZIALE */
+renderSuggestions();
+
+
+lucide.createIcons();
+
+// FRECCIA PRODOTTI & SERVIZI (DESKTOP)
+document.querySelectorAll(".nav-item-with-overlay").forEach(item => {
+  const trigger = item.querySelector(".nav-trigger");
+  const overlay = item.querySelector(".mega-overlay");
+
+  trigger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    item.classList.toggle("open");
+
+    overlay.style.opacity = item.classList.contains("open") ? "1" : "0";
+    overlay.style.pointerEvents = item.classList.contains("open") ? "auto" : "none";
+  });
+});
+
+// CHIUSURA CLICCANDO FUORI
+document.addEventListener("click", () => {
+  document.querySelectorAll(".nav-item-with-overlay").forEach(item => {
+    item.classList.remove("open");
+    const overlay = item.querySelector(".mega-overlay");
+    overlay.style.opacity = "0";
+    overlay.style.pointerEvents = "none";
+  });
+});
+
+// MOBILE DROPDOWN PRODOTTI & SERVIZI
+document.querySelectorAll(".mobile-dropdown").forEach(drop => {
+  const trigger = drop.querySelector(".mobile-trigger");
+
+  trigger.addEventListener("click", () => {
+    drop.classList.toggle("open");
+  });
+});
+
