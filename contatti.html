@@ -25,8 +25,10 @@
       <a href="storia.html">LA NOSTRA STORIA</a>
       
       <div class="nav-item-with-overlay">
-        <a href="#servizi">PRODOTTI & SERVIZI</a>
-
+        <div class="nav-trigger">
+          <a href="#servizi">PRODOTTI & SERVIZI</a>
+          <span class="nav-arrow"></span>
+        </div>
         <div class="mega-overlay">
           <ul>
             <li><a href="compressori.html">Compressori</a></li>
@@ -73,7 +75,8 @@
 
 </header>
 
-  <div id="mobileMenu" class="mobile-menu">
+  <!-- MENU MOBILE -->
+<div id="mobileMenu" class="mobile-menu">
   <div class="mobile-menu-header">
     <img src="assets/Logo.png" class="mobile-menu-logo" alt="FEB">
   </div>
@@ -81,7 +84,23 @@
   <ul class="mobile-menu-links">
     <li><a href="index.html">HOME <span>›</span></a></li>
     <li><a href="storia.html">LA NOSTRA STORIA <span>›</span></a></li>
-    <li><a href="#servizi">PRODOTTI & SERVIZI <span>›</span></a></li>
+    
+    <li class="mobile-dropdown">
+      <div class="mobile-trigger">
+        PRODOTTI & SERVIZI
+        <span class="mobile-arrow" data-lucide="chevron-down"></span>
+      </div>
+
+      <ul class="mobile-submenu">
+        <li><a href="compressori.html">Compressori</a></li>
+        <li><a href="pompe.html">Pompe</a></li>
+        <li><a href="riduttori.html">Riduttori</a></li>
+        <li><a href="valvole.html">Valvole</a></li>
+        <li><a href="turbine.html">Turbine</a></li>
+        <li><a href="ricambi.html">Ricambi</a></li>
+      </ul>
+    </li>
+    
     <li><a href="perchè.html">PERCHÈ SCEGLIERE NOI <span>›</span></a></li>
     <li><a href="contatti.html">CONTATTI <span>›</span></a></li>
   </ul>
@@ -307,14 +326,13 @@
   </div>
 </div>
 
-  <script src="js/appIT.js"></script>
-
   <script>
     lucide.createIcons();
   </script>
 
   <script src="js/contactForm.js"></script>
   <script src="js/contactHeroAnimation.js"></script>
+  <script src="js/appIT.js"></script>
 
 </body>
 </html>
