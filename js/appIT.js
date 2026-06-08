@@ -246,9 +246,9 @@ document.addEventListener("click", () => {
 // MOBILE DROPDOWN PRODOTTI & SERVIZI
 document.querySelectorAll(".mobile-dropdown").forEach(drop => {
   const trigger = drop.querySelector(".mobile-trigger");
-
   trigger.addEventListener("click", () => {
     drop.classList.toggle("open");
   });
 });
+
 

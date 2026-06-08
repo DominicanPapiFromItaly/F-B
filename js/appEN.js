@@ -53,13 +53,13 @@ document.addEventListener("click", function(e) {
 /* INTERNAL SEARCH */
 /* ---------------------- */
 const pages = [
-  { title: "Compressors", url: "compressori.html", keywords: "air compressors industry" },
-  { title: "Pumps", url: "pompe.html", keywords: "industrial hydraulic pumps" },
-  { title: "Reducers", url: "riduttori.html", keywords: "mechanical reducers gears" },
-  { title: "Valves", url: "valvole.html", keywords: "industrial valves flow control" },
-  { title: "Turbines", url: "turbine.html", keywords: "industrial turbines energy" },
-  { title: "Spare Parts", url: "ricambi.html", keywords: "industrial machinery spare parts" },
-  { title: "Contacts", url: "contatti.html", keywords: "contacts phone email offices" },
+  { title: "Compressors", url: "compressoriEN.html", keywords: "air compressors industry" },
+  { title: "Pumps", url: "pompeEN.html", keywords: "industrial hydraulic pumps" },
+  { title: "Reducers", url: "riduttoriEN.html", keywords: "mechanical reducers gears" },
+  { title: "Valves", url: "valvoleEN.html", keywords: "industrial valves flow control" },
+  { title: "Turbines", url: "turbineEN.html", keywords: "industrial turbines energy" },
+  { title: "Spare Parts", url: "ricambiEN.html", keywords: "industrial machinery spare parts" },
+  { title: "Contacts", url: "contattiEN.html", keywords: "contacts phone email offices" },
 ];
 
 function performSearch() {
