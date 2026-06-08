@@ -757,6 +757,8 @@ a {
   transition: right 0.35s ease;
   z-index: 9999;
   padding: 30px 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-menu-header {
@@ -1499,4 +1501,91 @@ a {
   padding: 18px 28px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* RESPONSIVE PER PERCHE.HTML */
+@media (max-width: 800px) {
+
+  /* HERO */
+.why-hero-left h1 {
+    font-size: 32px;
+    line-height: 1.2;
+    text-align: left; /* ← AGGIUNTO */
+  }
+
+  .why-hero-left p {
+    font-size: 16px;
+    text-align: left; /* ← AGGIUNTO */
+  }
+
+  .why-hero-grid {
+    grid-template-columns: 1fr;
+    text-align: left; /* ← CAMBIATO */
+  }
+
+  /* CARDS UNA SOTTO L'ALTRA */
+  .why-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  .why-card {
+    padding: 22px;
+  }
+
+  .why-card h3 {
+    font-size: 18px;
+  }
+
+  .why-card p {
+    font-size: 14px;
+  }
+
+  .why-kpi {
+    font-size: 16px;
+  }
+}
+
+/* BOT RESPONSIVE */
+@media (max-width: 600px) {
+
+  #fb-bot-window {
+    width: 90vw;          /* si adatta allo schermo */
+    height: 70vh;         /* più basso per non coprire tutto */
+    right: 5vw;           /* centrato rispetto al bottone */
+    bottom: 100px;        /* spazio dal fondo */
+    border-radius: 12px;
+  }
+
+  #fb-bot-button {
+    width: 55px;
+    height: 55px;
+    bottom: 20px;
+    right: 20px;
+    font-size: 24px;
+  }
+
+  #fb-bot-header {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  #fb-bot-messages {
+    padding: 10px;
+  }
+
+  #fb-bot-input {
+    padding: 10px;
+  }
+
+  #fb-user-input {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  #fb-send-btn {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
 }
