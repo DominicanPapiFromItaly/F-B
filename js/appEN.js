@@ -239,3 +239,87 @@ document.querySelectorAll(".mobile-dropdown").forEach(drop => {
     drop.classList.toggle("open");
   });
 });
+
+window.addEventListener("scroll", () => {
+  const header = document.querySelector(".site-header");
+
+  // Applica effetto solo su desktop
+  if (window.innerWidth > 800) {
+    if (window.scrollY > 40) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const animatedElements = document.querySelectorAll(
+    ".reveal-section, .reveal-fade-up, .reveal-fade-left, .reveal-fade-in, .about-underline"
+  );
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  animatedElements.forEach(el => observer.observe(el));
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* ---- ELEMENTI ANIMATI ---- */
+  const animatedElements = document.querySelectorAll(
+    ".reveal-section, .reveal-fade-up, .reveal-fade-left, .reveal-fade-in, .about-underline, .kpi-number"
+  );
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+
+        /* ---- COUNTER SOLO PER I KPI NUMERICI ---- */
+        if (entry.target.classList.contains("kpi-number")) {
+          const text = entry.target.textContent.trim();
+
+          // Se contiene numeri puri + "+" → animiamo
+          if (/^\d+\+$/.test(text)) {
+            animateCounter(entry.target);
+          }
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+
+  animatedElements.forEach(el => observer.observe(el));
+
+
+  /* ---- FUNZIONE COUNTER ---- */
+  function animateCounter(el) {
+    const finalValue = parseInt(el.textContent.replace(/\D/g, ""));
+    let current = 0;
+    const duration = 1600;
+    const startTime = performance.now();
+
+    function update(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = easeOutCubic(progress);
+      const value = Math.floor(eased * finalValue);
+
+      el.textContent = value + "+";
+
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  /* ---- EASING PREMIUM ---- */
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+});
