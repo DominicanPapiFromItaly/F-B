@@ -34,14 +34,29 @@ a {
 
 /* HEADER */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 20;
   background: var(--white);
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: 10px 0;
-  position: relative; /* AGGIUNTO */
+  transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
 }
+
+.site-header.scrolled {
+  background: rgba(255,255,255,0.97);
+  box-shadow: 0 2px 18px rgba(0,0,0,0.12);
+  padding: 6px 0; /* più compatto quando scende */
+}
+
+.site-header.scrolled .logo-img {
+  height: 60px;
+  transition: height 0.35s ease;
+}
+
+
 
 .header-inner {
   max-width: 1700px;
@@ -1588,4 +1603,196 @@ a {
     padding: 8px 14px;
     font-size: 14px;
   }
+}
+
+@media (max-width: 800px) {
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    background: var(--white);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 8px 0; /* compatto */
+  }
+
+  .site-header.scrolled {
+    background: var(--white);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 8px 0; /* blocca la variazione */
+  }
+
+  .logo-img {
+    height: 45px !important; /* blocca l’altezza */
+  }
+
+  body {
+    padding-top: 70px; /* evita il distacco tra header e hero */
+  }
+}
+
+@media (min-width: 801px) {
+  body {
+    padding-top: 120px;
+  }
+}
+
+.about-tenaris-style {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  max-width: 1400px;
+  margin: 120px auto;
+  padding: 0 20px;
+  align-items: center;
+}
+
+.about-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--blue-header);
+}
+
+.about-subtitle {
+  font-size: 42px;
+  color: var(--blue-header-dark);
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.about-description {
+  font-size: 17px;
+  color: #1a1a1a;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.about-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.kpi-box {
+  background: #f2f5f7;
+  padding: 22px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  text-align: left;
+}
+
+.kpi-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--blue-header);
+}
+
+.kpi-label {
+  font-size: 14px;
+  color: #333;
+  margin-top: 6px;
+}
+
+.about-right img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .about-tenaris-style {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-subtitle {
+    font-size: 30px;
+    color: var(--blue-header-dark);
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+}
+
+.about-underline {
+  width: 100px;
+  height: 4px;
+  background: var(--blue-header);
+  margin: 25px 0 40px 0;
+  border-radius: 4px;
+}
+
+/* --- ANIMAZIONI PREMIUM MULTINAZIONALI --- */
+
+.reveal-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade-up */
+.reveal-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.reveal-fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade-left */
+.reveal-fade-left {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 0.9s ease-out;
+}
+
+.reveal-fade-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fade-in */
+.reveal-fade-in {
+  opacity: 0;
+  transition: opacity 0.9s ease-out;
+}
+
+.reveal-fade-in.visible {
+  opacity: 1;
+}
+
+/* Underline scale */
+.about-underline {
+  width: 90px;
+  height: 4px;
+  background: var(--blue-header);
+  border-radius: 4px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-underline.visible {
+  transform: scaleX(1);
+}
+
+/* NUMBERS ANIMATION */
+.kpi-number {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.kpi-number.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
