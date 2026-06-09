@@ -1796,3 +1796,89 @@ a {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* SEZIONE SERVIZI */
+.services-section {
+  background: #ffffff;
+  padding: 80px 20px;
+}
+
+.services-grid {
+  max-width: 1300px;
+  margin: 40px auto 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+}
+
+.service-card {
+  background: #f2f5f7;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  text-align: left;
+}
+
+.service-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.service-card h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--blue-header);
+  margin: 18px 20px 8px;
+}
+
+.service-card p {
+  font-size: 15px;
+  color: #1a1a1a;
+  margin: 0 20px 16px;
+  line-height: 1.5;
+}
+
+.service-link {
+  display: inline-block;
+  margin: 0 20px 20px;
+  font-weight: 700;
+  color: var(--blue-header-dark);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.service-link:hover {
+  color: #ff8c42;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.services-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+
+.services-section .about-title,
+.services-section .about-underline {
+  text-align: left;
+  margin-left: 0;
+}
