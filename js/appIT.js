@@ -280,6 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
   animatedElements.forEach(el => observer.observe(el));
 });
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ---- ELEMENTI ANIMATI ---- */
@@ -333,4 +334,46 @@ document.addEventListener("DOMContentLoaded", () => {
     return 1 - Math.pow(1 - t, 3);
   }
 
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const wrapper = document.querySelector(".services-slider-wrapper");
+  const cards = document.querySelectorAll(".service-card");
+  const dotsContainer = document.querySelector(".slider-dots");
+
+  let index = 0;
+
+  // CREA I PALLINI
+  cards.forEach((_, i) => {
+    const dot = document.createElement("div");
+    dot.classList.add("dot");
+    if (i === 0) dot.classList.add("active");
+    dotsContainer.appendChild(dot);
+
+    dot.addEventListener("click", () => {
+      wrapper.scrollTo({
+        left: cards[i].offsetLeft - 20,
+        behavior: "smooth"
+      });
+    });
+  });
+
+  const dots = document.querySelectorAll(".dot");
+
+  // AGGIORNA PALLINI DURANTE LO SCROLL
+  wrapper.addEventListener("scroll", () => {
+    let closest = 0;
+    let minDist = Infinity;
+
+    cards.forEach((card, i) => {
+      const dist = Math.abs(card.offsetLeft - wrapper.scrollLeft);
+      if (dist < minDist) {
+        minDist = dist;
+        closest = i;
+      }
+    });
+
+    dots.forEach(dot => dot.classList.remove("active"));
+    dots[closest].classList.add("active");
+  });
 });
