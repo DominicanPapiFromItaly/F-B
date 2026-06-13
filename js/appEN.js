@@ -365,3 +365,41 @@ document.addEventListener("DOMContentLoaded", () => {
     dots[closest].classList.add("active");
   });
 });
+
+/* =============================== */
+/*  INTERSECTION OBSERVER PREMIUM  */
+/* =============================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  const animated = document.querySelectorAll(
+    ".reveal-up, .reveal-fade, .reveal-left, .reveal-right, .reveal-zoom, .timeline-item, .kpi-card, .photo-card, .timeline-grid"
+  );
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.25 });
+
+  animated.forEach(el => observer.observe(el));
+
+});
+
+/* =============================== */
+/*  PARALLAX HERO                   */
+/* =============================== */
+
+window.addEventListener("scroll", () => {
+  const hero = document.querySelector(".story-hero");
+  if (!hero) return;
+
+  const rect = hero.getBoundingClientRect();
+  if (rect.top < 0 && rect.bottom > 0) {
+    hero.classList.add("parallax-active");
+  } else {
+    hero.classList.remove("parallax-active");
+  }
+});
