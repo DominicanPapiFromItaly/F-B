@@ -1837,7 +1837,7 @@ a {
 /* IMMAGINE HERO DELLA CARD */
 .service-card img {
   width: 100%;
-  height: 260px; /* più grande, più impatto */
+  height: 300px; /* più grande, più impatto */
   object-fit: cover;
   display: block;
 }
@@ -2573,10 +2573,6 @@ a {
   gap: 30px;
 }
 
-.photo-card {
-  text-align: center;
-}
-
 .photo-placeholder {
   width: 100%;
   height: 260px;
@@ -2595,6 +2591,35 @@ a {
   font-size: 15px;
   color: #1a1a1a;
 }
+
+.photo-card {
+  text-align: center;
+}
+
+.photo-image-wrapper {
+  width: 100%;
+  height: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #dfe6f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-card figcaption {
+  margin-top: 12px;
+  font-size: 15px;
+  color: #1a1a1a;
+}
+
 
 /* -------------------------------------------------- */
 /* 5. VALORI AZIENDALI */
