@@ -3,6 +3,7 @@
   --blue-header-dark: #1565C0; /* blu medio */
   --blue-header-light: #64B5F6;/* highlight */
   --yellow-contact: #dfc906e1;
+  --blue-logo: #003399;
 
   --white: #ffffff;
   --gray-tech: #dce3eb;        /* testo tecnico chiaro */
@@ -136,7 +137,7 @@ a {
   padding: 15px 17px; /* prima 14px 16px */
   font-size: 16px;    /* prima 13px */
   letter-spacing: 1.2px;
-  font-family: Neue Haas Grotesk ;
+  font-family: Montserrat Regular;
 }
 
 /* Linea animata come nel tuo file oro */
@@ -223,7 +224,7 @@ a {
 
 /* FOOTER  */
 .site-footer {
-  background: #0a1a2a; /* blu profondo */
+  background: var(--blue-logo); /* blu profondo */
   padding: 40px 0 20px;
   color: var(--white);
 }
@@ -1153,13 +1154,6 @@ a {
   }
 }
 
-
-.why-hero-pro {
-  background: linear-gradient(135deg, #001a3f, #003399);
-  padding: 80px 20px;
-  color: white;
-}
-
 .why-hero-grid {
   max-width: 1300px;
   margin: 0 auto;
@@ -1318,15 +1312,19 @@ a {
     overflow: hidden;
     display: flex;
     align-items: center;
+    background: linear-gradient(135deg, #001a3f, #003399);
+    padding: 80px 20px;
+    color: white;
 }
 
+/* CANVAS ANIMAZIONE */
 /* CANVAS ANIMAZIONE */
 #why-hero-canvas {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 4; /* PRIMA ERA 1 */
 }
 
 /* TESTO */
@@ -1407,7 +1405,7 @@ a {
         linear-gradient(0deg, rgba(255,255,255,0.06) 1px, transparent 1px);
     background-size: 40px 40px;
     opacity: 0.08;
-    z-index: 3;
+    z-index: 2;
     pointer-events: none;
     animation: blueprintMove 18s linear infinite;
 }
@@ -1415,6 +1413,18 @@ a {
 @keyframes blueprintMove {
     from { transform: translateY(0px); }
     to   { transform: translateY(-80px); }
+}
+
+#rotor-3d model-viewer{
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 260px;
+    height: 260px;
+    display: block;
+    z-index: 20 !important;
+    pointer-events: none;
 }
 
 /* HERO CONTATTI PREMIUM */
@@ -1670,6 +1680,7 @@ a {
   line-height: 1.6;
   margin-bottom: 40px;
   font-family: Inter;
+  text-align: justify;
 }
 
 .about-kpi-grid {
@@ -1983,15 +1994,14 @@ a {
 }
 
 .eu-project-section {
-  background: #f2f5f7;
+  background: var(--gray-steel);
   padding: 60px 20px;
-  color: #003399;
+  color: var(--blue-logo);
 }
 
 .eu-project-inner {
   max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
 }
 
 .eu-logos-top,
@@ -2008,45 +2018,57 @@ a {
   height: 80px;
   width: auto;
   object-fit: contain;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .eu-title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
-  margin-bottom: 35px;
-  margin-top: 50px;  /* più distacco dal blocco sopra */
+  margin-bottom: 20px;
   font-family: Playfair Display Bold;
+   text-align: center;
 }
 
 .eu-subtitle {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
-  margin: 30px 0 15px;
-  margin-top: 90px;  /* più distacco dal blocco sopra */
-  margin-bottom: 30px;
+  margin: 60px 0 20px;
   font-family: Montserrat Regular;
+  text-align: center;
 }
 
 .eu-description {
   font-size: 17px;
   color: #1a1a1a;
   line-height: 1.6;
-  max-width: 900px;
-  margin: 0 auto 20px auto;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-family: Inter Regular;
+  text-align: justify;
+  text-justify: inter-word;
 }
+
+.eu-two-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 900px) {
+  .eu-two-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 /* MOBILE — riduce i loghi e li tiene tutti su una riga */
 @media (max-width: 600px) {
 
   .eu-logos-top img,
   .eu-logos-bottom img {
-    width: 50px;      /* dimensione perfetta per stare in linea */
+    width: 50px;
     height: auto;
-    margin: 0 3px;    /* piccolo spazio laterale */
+    margin: 0 3px;
   }
 
   .eu-logos-top,
@@ -2059,17 +2081,22 @@ a {
   }
 
   .eu-title {
-  font-size: 22px;
+    font-size: 22px;
   }
 
   .eu-subtitle {
-  font-size: 18px;
-}
+    font-size: 17px;
+  }
 
-.eu-description {
-  font-size: 15px;
+  .eu-description {
+    font-size: 15px;
+  }
+
+  .eu-two-cols {
+    grid-template-columns: 1fr; /* da 2 colonne → 1 colonna */
   }
 }
+
 
 /* MOBILE SLIDER */
 @media (max-width: 800px) {
@@ -2463,12 +2490,6 @@ a {
   font-weight: bold;
 }
 
-.section-header p {
-  font-size: 18px;
-  color: #1a1a1a;
-  line-height: 1.6;
-}
-
 .timeline-grid {
   max-width: 1100px;
   margin: 0 auto;
@@ -2720,6 +2741,10 @@ a {
   .photo-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .story-vision h2 {
+  font-size: 30px;
+}
 }
 
 @media (max-width: 600px) {
@@ -3478,3 +3503,95 @@ a {
         grid-template-columns: 1fr;
       }
     }
+
+.story-tech-scroll {
+  padding: 120px 20px;
+  background: #ffffff;
+  color: #003399;
+}
+
+.story-tech-header h2 {
+  font-size: 42px;
+  font-family: Poppins;
+  font-weight: bold;
+}
+
+.story-tech-header p {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.7;
+}
+
+/* Wrapper scroll */
+.story-tech-scroll-wrapper {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Immagine sticky */
+.story-tech-sticky {
+  position: sticky;
+  top: 120px; /* distanza dall’header */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.story-tech-sticky img {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 12px 28px rgba(0,0,0,0.25));
+  transition: transform 0.4s ease;
+}
+
+/* Spazio di scroll che “pilota” i frame */
+.story-tech-scroll-space {
+  height: 1800px; /* regola quanto “lungo” è il viaggio */
+}
+
+/* Optional: leggero zoom dinamico */
+.story-tech-sticky.zoom img {
+  transform: scale(1.03);
+}
+
+
+
+
+
+
+.story-tech-scroll {
+  padding: 80px 20px 0 20px;
+  background: #ffffff;
+  color: #003399;
+}
+
+.story-tech-header {
+  max-width: 900px;
+  margin: 0 auto 40px auto;
+  text-align: center;
+}
+
+/* Il contenitore wrapper deve contenere sia la parte sticky che l'altezza di scroll */
+.story-tech-scroll-wrapper {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.story-tech-sticky {
+  position: sticky;
+  top: 100px; /* Punto in cui l'immagine si blocca */
+  height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+@media (max-width: 700px) {
+  .story-tech-header h2 {
+  font-size: 23px;
+}
+}
